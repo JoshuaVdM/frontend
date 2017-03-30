@@ -26,7 +26,7 @@ class Visitor extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = [];
+    public $hasMany = ['teams' => '\INTEGRATION\frontend\Teams']; //meervoud wut?
     public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];
