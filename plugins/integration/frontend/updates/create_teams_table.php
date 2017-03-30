@@ -16,6 +16,8 @@ class CreateTeamsTable extends Migration
             $table->timestamps();
 
             $table->foreign('leader')->references('cms_id')->on('integration_frontend_visitors');
+            $table->unique('name');
+            $table->index(['name']);
         });
     }
 

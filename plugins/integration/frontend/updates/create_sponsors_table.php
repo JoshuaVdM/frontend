@@ -16,6 +16,7 @@ class CreateSponsorsTable extends Migration
             $table->string('website', 255);
             $table->string('tel', 255);
             $table->timestamps();
+
             $table->unique('name');
             $table->index(['cms_id', 'name']);
         });
