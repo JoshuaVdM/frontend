@@ -1,4 +1,4 @@
-<?php namespace INTEGRATION\Frontend\Models;
+<?php namespace Integration\Frontend\Models;
 
 use Model;
 
@@ -25,9 +25,9 @@ class Shift extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = ['visitor' => '\INTEGRATION\Frontend\Models\Visitor'];
+    public $hasOne = ['visitor' => '\Integration\Frontend\Models\Visitor'];
     public $hasMany = [];
-    public $belongsTo = ['schedule' => '\INTEGRATION\Frontend\Models\Schedule'];
+    public $belongsTo = ['schedule' => '\Integration\Frontend\Models\Schedule'];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

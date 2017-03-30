@@ -1,4 +1,4 @@
-<?php namespace INTEGRATION\Frontend\Updates;
+<?php namespace Integration\Frontend\Updates;
 
 use Schema;
 use October\Rain\Database\Schema\Blueprint;

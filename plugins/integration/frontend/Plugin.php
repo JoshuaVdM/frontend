@@ -1,4 +1,4 @@
-<?php namespace INTEGRATION\Frontend;
+<?php namespace Integration\Frontend;
 
 use Backend;
 use System\Classes\PluginBase;
@@ -18,8 +18,8 @@ class Plugin extends PluginBase
         return [
             'name'        => 'frontend',
             'description' => 'Main frontend plugin, will create models, tables, .. all basics for the frontend to work',
-            'author'      => 'INTEGRATION team',
-            'icon'        => 'icon-leaf'
+            'author'      => 'Integration team',
+            'icon'        => 'icon-globe'
         ];
     }
 
@@ -53,7 +53,7 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'INTEGRATION\Frontend\Components\MyComponent' => 'myComponent',
+            'Integration\Frontend\Components\MyComponent' => 'myComponent',
         ];
     }
 

@@ -1,4 +1,4 @@
-<?php namespace INTEGRATION\Frontend\Models;
+<?php namespace Integration\Frontend\Models;
 
 use Model;
 
@@ -27,7 +27,7 @@ class Team extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = ['visitor' => '\INTEGRATION\frontend\Visitor'];
+    public $belongsTo = ['visitor' => '\Integration\frontend\Visitor'];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

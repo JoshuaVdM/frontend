@@ -1,4 +1,4 @@
-<?php namespace INTEGRATION\Frontend\Models;
+<?php namespace Integration\Frontend\Models;
 
 use Model;
 
@@ -26,7 +26,7 @@ class Schedule extends Model
      * @var array Relations
      */
     public $hasOne = [];
-    public $hasMany = ['shifts' => '\INTEGRATION\Frontend\Models\Shift'];
+    public $hasMany = ['shifts' => '\Integration\Frontend\Models\Shift'];
     public $belongsTo = [];
     public $belongsToMany = [];
     public $morphTo = [];

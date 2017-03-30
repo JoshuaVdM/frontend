@@ -1,4 +1,4 @@
-<?php namespace INTEGRATION\Frontend\Models;
+<?php namespace Integration\Frontend\Models;
 
 use Model;
 
@@ -27,8 +27,8 @@ class Visitor extends Model
      */
     public $hasOne = [];
     public $hasMany = [
-        'teams' => '\INTEGRATION\Frontend\Models\Team',
-        'shifts' => '\INTEGRATION\Frontend\Models\Shift'
+        'teams' => '\Integration\Frontend\Models\Team',
+        'shifts' => '\Integration\Frontend\Models\Shift'
     ];
     public $belongsTo = [];
     public $belongsToMany = [];
