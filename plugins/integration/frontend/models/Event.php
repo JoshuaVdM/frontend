@@ -3,14 +3,14 @@
 use Model;
 
 /**
- * Sponsor Model
+ * Event Model
  */
-class Sponsor extends Model
+class Event extends Model
 {
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'integration_frontend_sponsors';
+    public $table = 'integration_frontend_events';
 
     /**
      * @var array Guarded fields

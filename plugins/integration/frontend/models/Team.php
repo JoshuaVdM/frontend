@@ -3,14 +3,14 @@
 use Model;
 
 /**
- * Sponsor Model
+ * Team Model
  */
-class Sponsor extends Model
+class Team extends Model
 {
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'integration_frontend_sponsors';
+    public $table = 'integration_frontend_teams';
 
     /**
      * @var array Guarded fields
@@ -27,7 +27,7 @@ class Sponsor extends Model
      */
     public $hasOne = [];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = ['visitor' => '\Integration\frontend\Visitor'];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

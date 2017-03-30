@@ -1,13 +1,19 @@
-<?php namespace Integration\Frontend;
+<?php namespace Integration\API;
 
 use Backend;
 use System\Classes\PluginBase;
 
 /**
- * frontend Plugin Information File
+ * API Plugin Information File
  */
 class Plugin extends PluginBase
 {
+    /**
+     * @var array
+     */
+    public $require = [
+        'Integration.Frontend',
+    ];
     /**
      * Returns information about this plugin.
      *
@@ -16,10 +22,10 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'frontend',
-            'description' => 'Main frontend plugin, will create models, tables, .. all basics for the frontend to work',
-            'author'      => 'Integration team',
-            'icon'        => 'icon-globe'
+            'name'        => 'API extension',
+            'description' => 'API Extension for other modules to create content for the frontend to display',
+            'author'      => 'Integration',
+            'icon'        => 'icon-paper-plane-o'
         ];
     }
 
@@ -40,7 +46,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        //
+
     }
 
     /**
@@ -53,7 +59,7 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'Integration\Frontend\Components\MyComponent' => 'myComponent',
+            'Integration\API\Components\MyComponent' => 'myComponent',
         ];
     }
 
@@ -67,8 +73,8 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'integration.frontend.some_permission' => [
-                'tab' => 'frontend',
+            'integration.api.some_permission' => [
+                'tab' => 'API',
                 'label' => 'Some permission'
             ],
         ];
@@ -84,11 +90,11 @@ class Plugin extends PluginBase
         return []; // Remove this line to activate
 
         return [
-            'frontend' => [
-                'label'       => 'frontend',
-                'url'         => Backend::url('integration/frontend/mycontroller'),
+            'api' => [
+                'label'       => 'API',
+                'url'         => Backend::url('integration/api/mycontroller'),
                 'icon'        => 'icon-leaf',
-                'permissions' => ['integration.frontend.*'],
+                'permissions' => ['integration.api.*'],
                 'order'       => 500,
             ],
         ];

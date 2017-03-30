@@ -3,14 +3,14 @@
 use Model;
 
 /**
- * Sponsor Model
+ * Shift Model
  */
-class Sponsor extends Model
+class Shift extends Model
 {
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'integration_frontend_sponsors';
+    public $table = 'integration_frontend_shifts';
 
     /**
      * @var array Guarded fields
@@ -25,9 +25,9 @@ class Sponsor extends Model
     /**
      * @var array Relations
      */
-    public $hasOne = [];
+    public $hasOne = ['visitor' => '\Integration\Frontend\Models\Visitor'];
     public $hasMany = [];
-    public $belongsTo = [];
+    public $belongsTo = ['schedule' => '\Integration\Frontend\Models\Schedule'];
     public $belongsToMany = [];
     public $morphTo = [];
     public $morphOne = [];

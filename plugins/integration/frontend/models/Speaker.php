@@ -3,14 +3,14 @@
 use Model;
 
 /**
- * Sponsor Model
+ * Speaker Model
  */
-class Sponsor extends Model
+class Speaker extends Model
 {
     /**
      * @var string The database table used by the model.
      */
-    public $table = 'integration_frontend_sponsors';
+    public $table = 'integration_frontend_speakers';
 
     /**
      * @var array Guarded fields

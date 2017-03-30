@@ -1,1 +1,23 @@
-1.0.1: First version of frontend
+1.0.1:
+    - First version
+1.0.2:
+    - Create sponsors table
+    - create_sponsors_table.php
+1.0.3:
+    - Create Visitors table
+    - create_visitors_table.php
+1.0.4:
+    - Create Speakers table
+    - create_speakers_table.php
+1.0.5:
+    - Create Teams table
+    - create_teams_table.php
+1.0.6:
+    - Create Event table
+    - create_events_table.php
+1.0.7:
+    - Create Shift table
+    - create_shifts_table.php
+1.0.8:
+    - Create Schedule table
+    - create_schedules_table.php
