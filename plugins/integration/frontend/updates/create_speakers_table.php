@@ -16,6 +16,9 @@ class CreateSpeakersTable extends Migration
             $table->string('name', 255);
             $table->string('surname', 255);
             $table->string('email', 255);
+            $table->string('topic', 255);
+            $table->string('desc_short', 255);
+            $table->text('desc');
             $table->timestamps();
 
             $table->unique('email');
