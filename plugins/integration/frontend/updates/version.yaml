@@ -3,3 +3,6 @@
 1.0.2:
     - Create sponsors table
     - create_sponsors_table.php
+1.0.3
+    - Create Visitors table
+    - create_visitors_table.php
