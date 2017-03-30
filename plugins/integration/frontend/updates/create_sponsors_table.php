@@ -12,12 +12,12 @@ class CreateSponsorsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('cms_id', 255);
-            $table->string('naam', 255);
+            $table->string('name', 255);
             $table->string('website', 255);
-            $table->string('telefoonnummer', 255);
+            $table->string('tel', 255);
             $table->timestamps();
-            $table->unique('naam');
-            $table->index(['cms_id', 'naam']);
+            $table->unique('name');
+            $table->index(['cms_id', 'name']);
         });
     }
 
