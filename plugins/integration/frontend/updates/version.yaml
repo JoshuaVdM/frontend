@@ -9,3 +9,6 @@
 1.0.4:
     - Create Speakers table
     - create_speakers_table.php
+1.0.5:
+    - Create Teams table
+    - create_teams_table.php
