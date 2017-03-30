@@ -1,1 +1,5 @@
-1.0.1: First version of frontend
+1.0.1:
+    - First version
+1.0.2:
+    - Create sponsors table
+    - create_sponsors_table.php
