@@ -1,0 +1,13 @@
+{
+    "name": "integration/api",
+    "description": "Integration SOAP API",
+    "authors": [
+        {
+            "name": "PudiPudi",
+            "email": "ludovic.marchand@student.ehb.be"
+        }
+    ],
+    "require": {
+        "artisaninweb/laravel-soap": "0.3.0.6"
+    }
+}
