@@ -22,7 +22,7 @@ class CreateShiftsTable extends Migration
 
             $table->unique('name');
             $table->index(['planning_id', 'name', 'start', 'place']);
-            $table->foreign('colaborator_id')->references('cms_id')->on('integration_frontend_visitors');
+            $table->foreign('colaborator_id')->references('crm_id')->on('integration_frontend_visitors');
         });
     }
 
