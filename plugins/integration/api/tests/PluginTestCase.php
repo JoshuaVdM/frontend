@@ -1,10 +1,13 @@
 <?php
 
+namespace Integration\API\Tests;
+
+use Illuminate\Foundation\Testing\TestCase;
 use System\Classes\UpdateManager;
 use System\Classes\PluginManager;
 use October\Rain\Database\Model as ActiveRecord;
 
-abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
+abstract class PluginTestCase extends TestCase
 {
     /**
      * @var array Cache for storing which plugins have been loaded
@@ -14,7 +17,7 @@ abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
 
     /**
      * Creates the application.
-     * @return Symfony\Component\HttpKernel\HttpKernelInterface
+     * @return \Symfony\Component\HttpKernel\HttpKernelInterface
      */
     public function createApplication()
     {
