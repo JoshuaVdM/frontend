@@ -13,6 +13,7 @@ class Plugin extends PluginBase
      */
     public $require = [
         'Integration.Frontend',
+        'RainLab.User',
     ];
     /**
      * Returns information about this plugin.
@@ -22,7 +23,7 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'SOAP',
+            'name'        => 'REST api',
             'description' => 'API Extension for other modules to create content for the frontend to display',
             'author'      => 'Integration team',
             'icon'        => 'icon-paper-plane-o'
@@ -55,7 +56,9 @@ class Plugin extends PluginBase
      */
     public function registerComponents()
     {
-        return []; // Remove this line to activate
+        return [
+            'Integration\API\Components\UserAccount' => 'account',
+        ]; // Remove this line to activate
 
         return [
             'Integration\API\Components\MyComponent' => 'myComponent',
