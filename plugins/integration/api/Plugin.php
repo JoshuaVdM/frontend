@@ -46,7 +46,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        App::register('Integration\Api\Services\VisitorService');
+        \App::register('\Integration\API\Providers\VisitorServiceProvider');
 
     }
 

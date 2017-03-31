@@ -16,21 +16,21 @@ class SoapServiceController
 
     public function SoapService()
     {
-        $server = new \SoapServer(
-            '/Integration/Api/SoapService.wsdl',
-            ['classmap' => [
-                'Visitor' => 'VisitorService'
-            ]]
-        );
-
-
-        $response = new Response();
-        $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
-
-        ob_start();
-        $server->handle();
-        $response->setContent(ob_get_clean());
-
-        return $response;
+//        $server = new \SoapServer(
+//            '/Integration/Api/SoapService.wsdl',
+//            ['classmap' => [
+//                'Visitor' => 'VisitorService'
+//            ]]
+//        );
+//
+//
+//        $response = new Response();
+//        $response->headers->set('Content-Type', 'text/xml; charset=ISO-8859-1');
+//
+//        ob_start();
+//        $server->handle();
+//        $response->setContent(ob_get_clean());
+//
+//        return $response;
     }
 }
