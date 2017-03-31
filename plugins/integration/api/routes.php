@@ -7,5 +7,5 @@
  */
 
 Route::group(['prefix' => 'api/v1'], function () {
-    Route::get('webservice', 'Integration\Api\Controllers\SoapController@webservice');
+    Route::get('soap', 'Integration\Api\Controllers\SoapServiceController@SoapService');
 });
