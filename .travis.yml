@@ -1,12 +1,13 @@
 language: php
 
 php:
- - '7.0'
- - '7.1'
- - hhvm
+  - 7.0
+  - 7.1
 
-before_script:
- - composer self-update
- - composer install --prefer-source --no-interaction
+sudo: false
 
-script: phpunit --configuration plugins/integration/api/phpunit.xml
+install:
+  - composer self-update
+  - travis_retry composer install --no-interaction --prefer-source
+
+script: vendor/bin/phpunit --configuration plugins/integration/api/phpunit.xml
