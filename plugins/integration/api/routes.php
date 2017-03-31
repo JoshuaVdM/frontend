@@ -7,5 +7,6 @@
  */
 
 Route::group(['prefix' => 'api/v1'], function () {
-    Route::get('webservice', 'Integration\Api\Controllers\SoapController@webservice');
+    Route::resource('visitor', 'Integration\Api\Controllers\VisitorController',
+        ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
 });

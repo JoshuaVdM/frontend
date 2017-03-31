@@ -1,6 +1,9 @@
-<?php namespace Integration\Frontend\Models;
+<?php
 
-use Model;
+namespace Integration\Frontend\Models;
+
+use October\Rain\Database\Model;
+
 
 /**
  * Visitor Model

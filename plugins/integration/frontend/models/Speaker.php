@@ -1,4 +1,6 @@
-<?php namespace Integration\Frontend\Models;
+<?php
+
+namespace Integration\Frontend\Models;
 
 use Model;
 
