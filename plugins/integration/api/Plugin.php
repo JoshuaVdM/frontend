@@ -22,9 +22,9 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name'        => 'API extension',
+            'name'        => 'SOAP',
             'description' => 'API Extension for other modules to create content for the frontend to display',
-            'author'      => 'Integration',
+            'author'      => 'Integration team',
             'icon'        => 'icon-paper-plane-o'
         ];
     }
@@ -46,6 +46,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
+        App::register('Integration\Api\Services\VisitorService');
 
     }
 
