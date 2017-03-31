@@ -129,6 +129,8 @@ abstract class PluginTestCase extends Illuminate\Foundation\Testing\TestCase
             }
 
             $plugin = $manager->loadPlugin($namespace, $path);
+            $manager->registerPlugin($plugin);
+            $manager->bootPlugin($plugin);
         }
 
         /*
