@@ -7,5 +7,6 @@
  */
 
 Route::group(['prefix' => 'api/v1'], function () {
-    Route::get('soap', 'Integration\Api\Controllers\SoapServiceController@SoapService');
+    Route::resource('visitor', 'Integration\Api\Controllers\VisitorController',
+        ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
 });

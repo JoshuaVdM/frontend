@@ -16,6 +16,8 @@ class CreateVisitorsTable extends Migration
             $table->string('name', 255);
             $table->string('surname', 255);
             $table->string('email', 255);
+            $table->boolean('cable')->default(false);
+            $table->boolean('breakfast')->default(false);
             $table->boolean('collaborator')->default(false);
             $table->timestamps();
 
