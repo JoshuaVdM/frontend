@@ -13,18 +13,21 @@ use RainLab\User\Components\Account as Account;
 
 class UserAccount extends Account
 {
-    public $request_;
+    public $requestData;
 
     public function onRegister() {
         //Do anything you need to do
 
+
         //$this['username'] = $this->request->username;
-        $_POST['name'] = $this->request_->name;
-        $_POST['surname'] = $this->request_->surname;
-        $_POST['username'] = $this->request_->username;
-        $_POST['password'] = $this->request_->password;
-        $_POST['password_confirmation'] = $this->request_->password_confirmation;
-        $_POST['email'] = $this->request_->email;
+        $_POST['name'] = $this->requestData['name'];
+        $_POST['surname'] = $this->requestData['surname'];
+        $_POST['username'] = $this->requestData['username'];
+        $_POST['password'] = $this->requestData['password'];
+        $_POST['password_confirmation'] = $this->requestData['password_confirmation'];
+        $_POST['email'] = $this->requestData['email'];
+
+        //return (array)post();
 
         parent::onRegister();
 

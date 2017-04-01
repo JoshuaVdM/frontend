@@ -22,57 +22,64 @@ class VisitorController extends Controller
 
     public function store(Request $request)
     {
+        if ($request->visitors)
+        {
+            $res = [];
+            foreach ($request->visitors as $visitor)
+            {
+                $visitorRes = json_decode($this->createUser($visitor)->getContent(), true);
+                array_push($res, $visitorRes['VisitorId']);
+            }
+            return $this->beautifulReturnMessage(200, 'Visitors Successfully Created', $res);
+        }
+        else {
 
-//        $data = post();
-//
-//        $rndm_pas = bin2hex(openssl_random_pseudo_bytes(4));
-//
-//        $request->request->add(['username' => $request->name . '.' . $request->surname]);
-//        $request->request->add(['password' => $rndm_pas]);
-//        $request->request->add(['password_confirmation' => $rndm_pas]);
-//
-//        $account = new UserAccount();
-//        $account->request_ = $request;
+            $visitor = json_decode($request->getContent(), true);
 
-//        return $account->onRegister();
+            return $this->createUser($visitor);
+        }
+    }
 
-        if ($request['crm_id']
-            && $request->name
-            && $request->surname
-            && $request->email
-            && $request->cable
-            && $request->breakfast
-            && $request->collaborator
+    private function createUser($user)
+    {
+        if ($user['crm_id']
+            && $user['name']
+            && $user['surname']
+            && $user['email']
+            && $user['cable']
+            && $user['breakfast']
+            && $user['collaborator']
         ) {
             // protected $fillable = ['activity_id', 'requestor_id', 'start_date', 'end_date', 'description', 'approver_id', 'approved'];
             $visitor = new Visitor();
-            $visitor->crm_id = $request->crm_id;
-            $visitor->name = $request->name;
-            $visitor->surname = $request->surname;
-            $visitor->email = $request->email;
-            $visitor->cable = $request->cable;
-            $visitor->breakfast = $request->breakfast;
-            $visitor->collaborator = $request->collaborator;
+            $visitor->crm_id = $user['crm_id'];
+            $visitor->name = $user['name'];
+            $visitor->surname = $user['surname'];
+            $visitor->email = $user['email'];
+            $visitor->cable = $user['cable'];
+            $visitor->breakfast = $user['breakfast'];
+            $visitor->collaborator = $user['collaborator'];
 
 
-            if(!$request->user_id)
+            if(!isset($user['user_id']))
             {
                 try {
                     $rndm_pas = bin2hex(openssl_random_pseudo_bytes(4));
 
-                    $request->request->add(['username' => $request->name . '.' . $request->surname]);
-                    $request->request->add(['password' => $rndm_pas]);
-                    $request->request->add(['password_confirmation' => $rndm_pas]);
+                    $user['username'] = $user['name']. '.' . $user['surname'];
+                    $user['password'] = $rndm_pas;
+                    $user['password_confirmation'] = $rndm_pas;
 
                     $account = new UserAccount();
-                    $account->request_ = $request;
-                    $request->request->add(['user_id' => $account->onRegister()]);
+                    $account->requestData = $user;
+
+                    $user['user_id'] = $account->onRegister();
                 }
                 catch (Exception $e){
                     return $this->beautifulReturn(406);
                 }
             }
-            $visitor->user_id = $request->user_id;
+            $visitor['user_id']= $user['user_id'];
 
 
             if ($visitor->save())
