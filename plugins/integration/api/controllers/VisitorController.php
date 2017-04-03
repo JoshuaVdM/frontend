@@ -50,7 +50,6 @@ class VisitorController extends Controller
             && $user['breakfast']
             && $user['collaborator']
         ) {
-            // protected $fillable = ['activity_id', 'requestor_id', 'start_date', 'end_date', 'description', 'approver_id', 'approved'];
             $visitor = new Visitor();
             $visitor->crm_id = $user['crm_id'];
             $visitor->name = $user['name'];

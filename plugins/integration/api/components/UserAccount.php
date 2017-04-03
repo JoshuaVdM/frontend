@@ -15,11 +15,15 @@ class UserAccount extends Account
 {
     public $requestData;
 
-    public function onRegister() {
-        //Do anything you need to do
-
-
-        //$this['username'] = $this->request->username;
+    /**
+     * Creates user using RainLab.User methods.
+     *
+     * @var mixed requestData (public)
+     * @var String name, surname, username, password, password_confirmation, email
+     * @return int newly made local user_id (credentials)
+     */
+    public function onRegister()
+    {
         $_POST['name'] = $this->requestData['name'];
         $_POST['surname'] = $this->requestData['surname'];
         $_POST['username'] = $this->requestData['username'];
