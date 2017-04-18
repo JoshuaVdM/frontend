@@ -1,5 +1,9 @@
-<?php namespace Integration\API\Controllers;
+<?php
+/**
+ * Visitor Controller Back-end Controller
+ */
 
+namespace Integration\API\Controllers;
 
 use Illuminate\Routing\Controller;
 use Integration\API\Components\UserAccount;
@@ -10,10 +14,6 @@ use RainLab\User\Models\User;
 use Integration\Frontend\Models\Visitor;
 use Integration\API\Traits\ReturnTrait;
 
-
-/**
- * Visitor Controller Back-end Controller
- */
 class VisitorController extends Controller
 {
     use ReturnTrait;
