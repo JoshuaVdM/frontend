@@ -67,4 +67,48 @@ class ShiftController extends Controller
         }
         return $this->beautifulReturn(400);
     }
+
+    public function update($id, Request $request)
+    {
+        $shift = Shift::find($id);
+
+        if (!empty($shift))
+        {
+            if ($request->planning_id)
+                $shift->planning_id = $request->planning_id;
+            if ($request->name)
+                $shift->name = $request->name;
+            if ($request->colaborator_id)
+                $shift->colaborator_id = $request->colaborator_id;
+            if ($request->start)
+                $shift->start = $request->start;
+            if ($request->end)
+                $shift->end = $request->end;
+            if ($request->place)
+                $shift->place = $request->place;
+            if ($request->desc)
+                $shift->desc = $request->desc;
+
+            if ($shift->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Updated']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function destroy($id)
+    {
+        $shift = Shift::find($id);
+        if (!empty($shift))
+        {
+            if ($shift->delete())
+                return $this->beautifulReturn(200, ['Suffix' => 'Deleted']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
 }
