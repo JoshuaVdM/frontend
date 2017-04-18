@@ -57,4 +57,38 @@ class ScheduleController extends Controller
         }
         return $this->beautifulReturn(400);
     }
+
+    public function update($id, Request $request)
+    {
+        $schedule = Schedule::find($id);
+
+        if (!empty($schedule))
+        {
+            if ($request->planning_id)
+                $schedule->planning_id = $request->planning_id;
+            if ($request->shift_id)
+                $schedule->shift_id = $request->shift_id;
+
+            if ($schedule->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Updated']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function destroy($id)
+    {
+        $schedule = Schedule::find($id);
+        if (!empty($schedule))
+        {
+            if ($schedule->delete())
+                return $this->beautifulReturn(200, ['Suffix' => 'Deleted']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
 }
