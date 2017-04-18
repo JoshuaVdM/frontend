@@ -6,6 +6,7 @@
 namespace Integration\API\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 use Integration\API\Components\UserAccount;
 use League\Flysystem\Exception;
 use Illuminate\Http\Request;
@@ -76,6 +77,52 @@ class VisitorController extends Controller
                 return $this->beautifulReturn(200, ['Suffix' => 'Created', 'VisitorId' => $visitor->id]);
 
             return $this->beautifulReturn(406);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function update($id, Request $request)
+    {
+        $visitor = Visitor::find($id);
+
+        if (!empty($visitor))
+        {
+            if ($request->crm_id)
+                $visitor->crm_id = $request->crm_id;
+            if ($request->name)
+                $visitor->name = $request->name;
+            if ($request->surname)
+                $visitor->surname = $request->surname;
+            if ($request->email)
+                $visitor->email = $request->email;
+            if ($request->cable)
+                $visitor->cable = $request->cable;
+            if ($request->breakfast)
+                $visitor->breakfast = $request->breakfast;
+            if ($request->collaborator)
+                $visitor->collaborator = $request->collaborator;
+
+            if ($visitor->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Updated']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function destroy($id)
+    {
+        $visitor = Visitor::find($id);
+        if (!empty($visitor))
+        {
+            UserAccount::deleteUserAccount($visitor->user_id);
+
+            if ($visitor->delete())
+                return $this->beautifulReturn(200, ['Suffix' => 'Deleted']);
+
+        } else {
+            return $this->beautifulReturn(404);
         }
         return $this->beautifulReturn(400);
     }
