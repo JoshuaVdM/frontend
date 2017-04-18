@@ -17,4 +17,6 @@ Route::group(['prefix' => 'api/v1'], function () {
         ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
     Route::resource('schedule', 'Integration\Api\Controllers\ScheduleController',
         ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
+    Route::resource('shift', 'Integration\Api\Controllers\ShiftController',
+        ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
 });
