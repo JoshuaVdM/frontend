@@ -65,4 +65,46 @@ class EventController extends Controller
         }
         return $this->beautifulReturn(400);
     }
+
+    public function update($id, Request $request)
+    {
+        $event = Event::find($id);
+
+        if (!empty($event))
+        {
+            if ($request->planning_id)
+                $event->planning_id = $request->planning_id;
+            if ($request->name)
+                $event->name = $request->name;
+            if ($request->desc)
+                $event->desc = $request->desc;
+            if ($request->start)
+                $event->start = $request->start;
+            if ($request->end)
+                $event->end = $request->end;
+            if ($request->location)
+                $event->location = $request->location;
+
+            if ($event->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Updated']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function destroy($id)
+    {
+        $event = Event::find($id);
+        if (!empty($event))
+        {
+            if ($event->delete())
+                return $this->beautifulReturn(200, ['Suffix' => 'Deleted']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
 }
