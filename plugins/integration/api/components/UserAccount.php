@@ -8,7 +8,10 @@
 
 namespace Integration\API\Components;
 
+use Backend\Behaviors\FormController;
 use Cms\Classes\CodeBase;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Event;
 use RainLab\User\Components\Account as Account;
 
 use RainLab\User\Models\User;
@@ -62,6 +65,24 @@ class UserAccount
                 //send mail
                 return $newUser->id;
             }
+        }
+        return false;
+    }
+
+    public static function deleteUserAccount($id)
+    {
+        // niet mooiste oplossing.. fucking hooks da ni werken maa fuckit
+        $userAccount = User::find($id);
+        if (!empty($userAccount))
+        {
+            $userAccount->is_activated = 0;
+            $userAccount->deleted_at = date('Y-m-d H:i:s');
+            if ($userAccount->save())
+                return true;
+
+
+//            return DB::table('users')->where('id', '=', $id)->update(['username' => null, 'is_activated' => 0, 'deleted_at' => date('Y-m-d H:i:s')]);
+
         }
         return false;
     }
