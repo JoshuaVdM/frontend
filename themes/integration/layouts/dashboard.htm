@@ -1,0 +1,36 @@
+description = "Dashboard layout"
+==
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Ludo
+ * Date: 03/04/2017
+ * Time: 18:00
+ */
+?>
+==
+<!doctype html>
+<html>
+<head>
+    {% partial 'includes/head' %}
+</head>
+<body>
+<div class="sidebar col-sm-2">
+    {% partial 'includes/sidebar' %}
+</div>
+
+<div class="container col-sm-10">
+    <header class="row">
+        {% partial 'includes/header' %}
+    </header>
+
+    <div id="main" class="row">
+        {% page %}
+    </div>
+
+    <footer class="row">
+        {% partial 'includes/footer' %}
+    </footer>
+</div>
+</body>
+</html>

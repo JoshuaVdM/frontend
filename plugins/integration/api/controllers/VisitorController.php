@@ -1,7 +1,12 @@
-<?php namespace Integration\API\Controllers;
+<?php
+/**
+ * Visitor Controller Back-end Controller
+ */
 
+namespace Integration\API\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Hash;
 use Integration\API\Components\UserAccount;
 use League\Flysystem\Exception;
 use Illuminate\Http\Request;
@@ -10,10 +15,6 @@ use RainLab\User\Models\User;
 use Integration\Frontend\Models\Visitor;
 use Integration\API\Traits\ReturnTrait;
 
-
-/**
- * Visitor Controller Back-end Controller
- */
 class VisitorController extends Controller
 {
     use ReturnTrait;
@@ -50,7 +51,6 @@ class VisitorController extends Controller
             && $user['breakfast']
             && $user['collaborator']
         ) {
-            // protected $fillable = ['activity_id', 'requestor_id', 'start_date', 'end_date', 'description', 'approver_id', 'approved'];
             $visitor = new Visitor();
             $visitor->crm_id = $user['crm_id'];
             $visitor->name = $user['name'];
@@ -63,29 +63,66 @@ class VisitorController extends Controller
 
             if(!isset($user['user_id']))
             {
-                try {
-                    $rndm_pas = bin2hex(openssl_random_pseudo_bytes(4));
+                $user_id = UserAccount::createUserAccount($user);
 
-                    $user['username'] = $user['name']. '.' . $user['surname'];
-                    $user['password'] = $rndm_pas;
-                    $user['password_confirmation'] = $rndm_pas;
-
-                    $account = new UserAccount();
-                    $account->requestData = $user;
-
-                    $user['user_id'] = $account->onRegister();
-                }
-                catch (Exception $e){
+                if ($user_id)
+                    $user['user_id'] = $user_id;
+                else
                     return $this->beautifulReturn(406);
-                }
             }
-            $visitor['user_id']= $user['user_id'];
+            $visitor->user_id= $user['user_id'];
 
 
             if ($visitor->save())
                 return $this->beautifulReturn(200, ['Suffix' => 'Created', 'VisitorId' => $visitor->id]);
 
             return $this->beautifulReturn(406);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function update($id, Request $request)
+    {
+        $visitor = Visitor::find($id);
+
+        if (!empty($visitor))
+        {
+            if ($request->crm_id)
+                $visitor->crm_id = $request->crm_id;
+            if ($request->name)
+                $visitor->name = $request->name;
+            if ($request->surname)
+                $visitor->surname = $request->surname;
+            if ($request->email)
+                $visitor->email = $request->email;
+            if ($request->cable)
+                $visitor->cable = $request->cable;
+            if ($request->breakfast)
+                $visitor->breakfast = $request->breakfast;
+            if ($request->collaborator)
+                $visitor->collaborator = $request->collaborator;
+
+            if ($visitor->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Updated']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function destroy($id)
+    {
+        $visitor = Visitor::find($id);
+        if (!empty($visitor))
+        {
+            UserAccount::deleteUserAccount($visitor->user_id);
+
+            if ($visitor->delete())
+                return $this->beautifulReturn(200, ['Suffix' => 'Deleted']);
+
+        } else {
+            return $this->beautifulReturn(404);
         }
         return $this->beautifulReturn(400);
     }
