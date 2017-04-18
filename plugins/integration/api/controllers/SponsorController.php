@@ -60,4 +60,42 @@ class SponsorController extends Controller
         }
         return $this->beautifulReturn(400);
     }
+
+    public function update($id, Request $request)
+    {
+        $sponsor = Sponsor::find($id);
+
+        if (!empty($sponsor))
+        {
+            if ($request->crm_id)
+                $sponsor->crm_id = $request->crm_id;
+            if ($request->name)
+                $sponsor->name = $request->name;
+            if ($request->website)
+                $sponsor->website = $request->website;
+            if ($request->tel)
+                $sponsor->tel = $request->tel;
+
+            if ($sponsor->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Updated']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function destroy($id)
+    {
+        $sponsor = Sponsor::find($id);
+        if (!empty($sponsor))
+        {
+            if ($sponsor->delete())
+                return $this->beautifulReturn(200, ['Suffix' => 'Deleted']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
 }
