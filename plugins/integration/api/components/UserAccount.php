@@ -11,9 +11,10 @@ namespace Integration\API\Components;
 use Cms\Classes\CodeBase;
 use RainLab\User\Components\Account as Account;
 
-class UserAccount extends Account
+use RainLab\User\Models\User;
+
+class UserAccount
 {
-    public $requestData;
 
     /**
      * Creates user using RainLab.User methods.
@@ -22,22 +23,46 @@ class UserAccount extends Account
      * @var String name, surname, username, password, password_confirmation, email
      * @return int newly made local user_id (credentials)
      */
-    public function onRegister()
+    public static function createUserAccount($user)
     {
-        $_POST['name'] = $this->requestData['name'];
-        $_POST['surname'] = $this->requestData['surname'];
-        $_POST['username'] = $this->requestData['username'];
-        $_POST['password'] = $this->requestData['password'];
-        $_POST['password_confirmation'] = $this->requestData['password_confirmation'];
-        $_POST['email'] = $this->requestData['email'];
+        if ($user['name']
+            && $user['surname']
+            && $user['email']
+        ) {
 
-        //return (array)post();
 
-        parent::onRegister();
+            $now = date('Y-m-d H:i:s');
+            $username = $user['name'] . '.' . $user['surname'];
+            $password = bin2hex(openssl_random_pseudo_bytes(4));
+            $persist_code = bin2hex(openssl_random_pseudo_bytes(4));
 
-        $user = $this->user(); // This is the user that was just created, here for example, dont need to assign it really
-        // Now you can do stuff with any of the variables that were generated (such as user above)
+            $newUser = new User();
+            $newUser->name = $user['name'];
+            $newUser->surname = $user['surname'];
+//            $newUser->login = $username;
+            $newUser->username = $username;
+            $newUser->email = $user['email'];
+            $newUser->password = $password;
+            $newUser->password_confirmation = $password;
 
-        return $user->id;
+            $newUser->persist_code = $persist_code;
+
+            $newUser->created_at = $now;
+            $newUser->updated_at = $now;
+            $newUser->activated_at = $now;
+            $newUser->is_activated = 1;
+            $newUser->timezone_id = 1;
+
+            //@todo: set permission once permissions added (through frontend plugin)
+
+
+            //@todo: send comfirmation mail with random password included
+            if ($newUser->save())
+            {
+                //send mail
+                return $newUser->id;
+            }
+        }
+        return false;
     }
 }
