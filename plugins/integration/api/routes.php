@@ -11,4 +11,6 @@ Route::group(['prefix' => 'api/v1'], function () {
         ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
     Route::resource('speaker', 'Integration\Api\Controllers\SpeakerController',
         ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
+    Route::resource('sponsor', 'Integration\Api\Controllers\SponsorController',
+        ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
 });
