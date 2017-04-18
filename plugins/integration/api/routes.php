@@ -15,4 +15,6 @@ Route::group(['prefix' => 'api/v1'], function () {
         ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
     Route::resource('event', 'Integration\Api\Controllers\EventController',
         ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
+    Route::resource('schedule', 'Integration\Api\Controllers\ScheduleController',
+        ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
 });
