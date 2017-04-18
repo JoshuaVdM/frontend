@@ -17,7 +17,7 @@ class SponsorController extends Controller
 {
     use ReturnTrait;
 
-    protected $className = 'Speaker';
+    protected $className = 'Sponsor';
 
     public function store(Request $request)
     {
@@ -49,8 +49,8 @@ class SponsorController extends Controller
             $newSponsor = new Sponsor();
             $newSponsor->crm_id = $sponsor['crm_id'];
             $newSponsor->name = $sponsor['name'];
-            $newSponsor->surname = $sponsor['website'];
-            $newSponsor->email = $sponsor['tel'];
+            $newSponsor->website = $sponsor['website'];
+            $newSponsor->tel = $sponsor['tel'];
 
 
             if ($newSponsor->save())
