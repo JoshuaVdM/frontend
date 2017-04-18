@@ -13,7 +13,6 @@ use Integration\Frontend\Models\Speaker;
 
 class SpeakerController extends Controller
 {
-
     use ReturnTrait;
 
     protected $className = 'Speaker';
@@ -57,7 +56,7 @@ class SpeakerController extends Controller
             $speaker->desc_short = $user['desc_short'];
             $speaker->desc = $user['desc'];
 
-
+            // Create account if Speaker doesn't already has one.
             if(!isset($user['user_id']))
             {
                 $user_id = UserAccount::createUserAccount($user);
@@ -74,6 +73,52 @@ class SpeakerController extends Controller
                 return $this->beautifulReturn(200, ['Suffix' => 'Created', 'SpeakerId' => $speaker->id]);
 
             return $this->beautifulReturn(406);
+        }
+        return $this->beautifulReturn(400);
+    }
+    
+    public function update($id, Request $request)
+    {
+        $speaker = Speaker::find($id);
+
+        if (!empty($speaker))
+        {
+            if ($request->crm_id)
+                $speaker->crm_id = $request->crm_id;
+            if ($request->name)
+                $speaker->name = $request->name;
+            if ($request->surname)
+                $speaker->surname = $request->surname;
+            if ($request->email)
+                $speaker->email = $request->email;
+            if ($request->topic)
+                $speaker->topic = $request->topic;
+            if ($request->desc_short)
+                $speaker->desc_short = $request->desc_short;
+            if ($request->desc)
+                $speaker->desc = $request->desc;
+
+            if ($speaker->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Updated']);
+
+        } else {
+            return $this->beautifulReturn(404);
+        }
+        return $this->beautifulReturn(400);
+    }
+
+    public function destroy($id)
+    {
+        $speaker = Speaker::find($id);
+        if (!empty($speaker))
+        {
+            UserAccount::deleteUserAccount($speaker->user_id);
+
+            if ($speaker->delete())
+                return $this->beautifulReturn(200, ['Suffix' => 'Deleted']);
+
+        } else {
+            return $this->beautifulReturn(404);
         }
         return $this->beautifulReturn(400);
     }
