@@ -16,25 +16,65 @@ class SpeakerController extends Controller
 
     use ReturnTrait;
 
-    protected $className = 'Visitor';
+    protected $className = 'Speaker';
 
     public function store(Request $request)
     {
-        if ($request->visitors)
+        if ($request->speakers)
         {
             $res = [];
-            foreach ($request->visitors as $visitor)
+            foreach ($request->speakers as $speaker)
             {
-                $visitorRes = json_decode($this->createUser($visitor)->getContent(), true);
-                array_push($res, $visitorRes['VisitorId']);
+                $speakerRes = json_decode($this->createSpeaker($speaker)->getContent(), true);
+                array_push($res, $speakerRes['SpeakerId']);
             }
-            return $this->beautifulReturnMessage(200, 'Visitors Successfully Created', $res);
+            return $this->beautifulReturnMessage(200, 'Speakers Successfully Created', $res);
         }
         else {
 
-            $visitor = json_decode($request->getContent(), true);
+            $speaker = json_decode($request->getContent(), true);
 
-            return $this->createUser($visitor);
+            return $this->createSpeaker($speaker);
         }
+    }
+
+    private function createSpeaker($user)
+    {
+        if ($user['crm_id']
+            && $user['name']
+            && $user['surname']
+            && $user['email']
+            && $user['topic']
+            && $user['desc_short']
+            && $user['desc']
+        ) {
+            $speaker = new Speaker();
+            $speaker->crm_id = $user['crm_id'];
+            $speaker->name = $user['name'];
+            $speaker->surname = $user['surname'];
+            $speaker->email = $user['email'];
+            $speaker->topic = $user['topic'];
+            $speaker->desc_short = $user['desc_short'];
+            $speaker->desc = $user['desc'];
+
+
+            if(!isset($user['user_id']))
+            {
+                $user_id = UserAccount::createUserAccount($user);
+
+                if ($user_id)
+                    $user['user_id'] = $user_id;
+                else
+                    return $this->beautifulReturn(406);
+            }
+            $speaker->user_id = $user['user_id'];
+
+
+            if ($speaker->save())
+                return $this->beautifulReturn(200, ['Suffix' => 'Created', 'SpeakerId' => $speaker->id]);
+
+            return $this->beautifulReturn(406);
+        }
+        return $this->beautifulReturn(400);
     }
 }
