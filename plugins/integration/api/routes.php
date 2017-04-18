@@ -9,4 +9,6 @@
 Route::group(['prefix' => 'api/v1'], function () {
     Route::resource('visitor', 'Integration\Api\Controllers\VisitorController',
         ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
+    Route::resource('speaker', 'Integration\Api\Controllers\SpeakerController',
+        ['except' => ['index', 'show', 'patch', 'create', 'edit']]);
 });
